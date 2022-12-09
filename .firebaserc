@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-firebase-app-fb381": {
+      "hosting": {
+        "angular-firebase-app": [
+          "angular-firebase-app-fb381"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-firebase-app-fb381"
+  }
+}
