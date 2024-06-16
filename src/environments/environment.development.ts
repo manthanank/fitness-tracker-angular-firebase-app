@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
     apiKey: "AIzaSyC7d2l24GDcr7Hn1aa98fpF6qRfJeGoFUM",
     authDomain: "fitness-tracker-app-angular.firebaseapp.com",

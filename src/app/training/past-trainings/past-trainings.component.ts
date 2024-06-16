@@ -4,7 +4,9 @@ import {
   ViewChild,
   AfterViewInit
 } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
 
 import { Exercise } from '../exercise.model';

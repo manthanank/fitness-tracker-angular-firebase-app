@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { MatSnackBar } from '@angular/material';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Store } from '@ngrx/store';
 
 import { User } from './user.model';
@@ -38,7 +37,7 @@ export class AuthService {
   registerUser(authData: AuthData) {
     // this.uiService.loadingStateChanged.next(true);
     this.store.dispatch(new UI.StartLoading());
-    this.afAuth.auth
+    this.afAuth
       .createUserWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         // this.uiService.loadingStateChanged.next(false);
@@ -54,7 +53,7 @@ export class AuthService {
   login(authData: AuthData) {
     // this.uiService.loadingStateChanged.next(true);
     this.store.dispatch(new UI.StartLoading());
-    this.afAuth.auth
+    this.afAuth
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         // this.uiService.loadingStateChanged.next(false);
@@ -68,6 +67,6 @@ export class AuthService {
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.afAuth.signOut();
   }
 }
