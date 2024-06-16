@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoreModule } from '@ngrx/store';
 
 import { TrainingComponent } from './training.component';
@@ -20,13 +17,13 @@ import { trainingReducer } from './training.reducer';
     CurrentTrainingComponent,
     NewTrainingComponent,
     PastTrainingsComponent,
-    StopTrainingComponent
+    StopTrainingComponent,
   ],
   imports: [
     SharedModule,
     TrainingRoutingModule,
-    StoreModule.forFeature('training', trainingReducer)
+    StoreModule.forFeature('training', trainingReducer),
   ],
-  entryComponents: [StopTrainingComponent]
+  entryComponents: [StopTrainingComponent],
 })
 export class TrainingModule {}

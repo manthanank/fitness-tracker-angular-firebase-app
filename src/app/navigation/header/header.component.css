@@ -18,3 +18,34 @@ a:active {
   display: inline-block;
   padding-left: 6px;
 }
+
+.menu-button {
+  display: none;
+}
+
+.title {
+  flex-grow: 1;
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navigation-items {
+  display: flex;
+  gap: 10px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 599px) {
+  .menu-button {
+    display: block;
+  }
+
+  .navigation {
+    display: none;
+  }
+}
