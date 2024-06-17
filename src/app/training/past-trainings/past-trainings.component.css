@@ -1,9 +1,0 @@
-.center-align {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-item {
-  flex: 0 0 40%;
-}

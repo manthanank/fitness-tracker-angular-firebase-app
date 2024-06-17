@@ -22,7 +22,7 @@ export class AuthService {
   ) {}
 
   initAuthListener() {
-    this.afAuth.authState.subscribe(user => {
+    this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.store.dispatch(new Auth.SetAuthenticated());
         this.router.navigate(['/training']);
@@ -39,14 +39,14 @@ export class AuthService {
     this.store.dispatch(new UI.StartLoading());
     this.afAuth
       .createUserWithEmailAndPassword(authData.email, authData.password)
-      .then(result => {
+      .then((result) => {
         // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
       })
-      .catch(error => {
+      .catch((error) => {
         // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
-        this.uiService.showSnackbar(error.message, null, 3000);
+        this.uiService.showSnackbar(error.message, '', 3000);
       });
   }
 
@@ -55,14 +55,14 @@ export class AuthService {
     this.store.dispatch(new UI.StartLoading());
     this.afAuth
       .signInWithEmailAndPassword(authData.email, authData.password)
-      .then(result => {
+      .then((result) => {
         // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
       })
-      .catch(error => {
+      .catch((error) => {
         // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
-        this.uiService.showSnackbar(error.message, null, 3000);
+        this.uiService.showSnackbar(error.message, '', 3000);
       });
   }
 

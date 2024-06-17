@@ -39,7 +39,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   exports: [
     MatButtonModule,
@@ -60,7 +60,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatSnackBarModule
-  ]
+    MatSnackBarModule,
+  ],
 })
 export class MaterialModule {}

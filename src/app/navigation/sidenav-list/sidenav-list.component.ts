@@ -1,18 +1,16 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { AuthService } from '../../auth/auth.service';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import * as fromRoot from '../../app.reducer';
-
 @Component({
   selector: 'app-sidenav-list',
   templateUrl: './sidenav-list.component.html',
-  styleUrls: ['./sidenav-list.component.css']
+  styleUrls: ['./sidenav-list.component.scss'],
 })
 export class SidenavListComponent implements OnInit {
   @Output() closeSidenav = new EventEmitter<void>();
-  isAuth$: Observable<boolean>;
+  isAuth$: Observable<boolean> = new Observable();
 
   constructor(
     private authService: AuthService,

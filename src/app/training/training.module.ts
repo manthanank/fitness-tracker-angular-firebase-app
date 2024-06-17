@@ -6,7 +6,6 @@ import { CurrentTrainingComponent } from './current-training/current-training.co
 import { NewTrainingComponent } from './new-training/new-training.component';
 import { PastTrainingsComponent } from './past-trainings/past-trainings.component';
 import { StopTrainingComponent } from './current-training/stop-training.component';
-import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { TrainingRoutingModule } from './training-routing.module';
 import { trainingReducer } from './training.reducer';
@@ -24,6 +23,6 @@ import { trainingReducer } from './training.reducer';
     TrainingRoutingModule,
     StoreModule.forFeature('training', trainingReducer),
   ],
-  entryComponents: [StopTrainingComponent],
+  // entryComponents: [StopTrainingComponent],
 })
 export class TrainingModule {}

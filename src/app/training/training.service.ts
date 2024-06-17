@@ -28,11 +28,12 @@ export class TrainingService {
         .collection('availableExercises')
         .snapshotChanges()
         .pipe(
-          map(docArray => {
-            return docArray.map(doc => {
+          map((docArray) => {
+            return docArray.map((doc) => {
+              const exerciseData = doc.payload.doc.data() as Exercise;
               return {
+                ...exerciseData,
                 id: doc.payload.doc.id,
-                ...doc.payload.doc.data() as Exercise
               };
             });
           })
@@ -42,11 +43,11 @@ export class TrainingService {
             this.store.dispatch(new UI.StopLoading());
             this.store.dispatch(new Training.SetAvailableTrainings(exercises));
           },
-          error => {
+          (error) => {
             this.store.dispatch(new UI.StopLoading());
             this.uiService.showSnackbar(
               'Fetching Exercises failed, please try again later',
-              null,
+              '',
               3000
             );
           }
@@ -59,42 +60,72 @@ export class TrainingService {
   }
 
   completeExercise() {
-    this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(ex => {
-      this.addDataToDatabase({
-        ...ex,
-        date: new Date(),
-        state: 'completed'
+    this.store
+      .select(fromTraining.getActiveTraining)
+      .pipe(take(1))
+      .subscribe((ex) => {
+        if (ex) {
+          this.addDataToDatabase({
+            ...(ex as Exercise),
+            date: new Date(),
+            state: 'completed',
+          });
+        }
+        this.store.dispatch(new Training.StopTraining());
       });
-      this.store.dispatch(new Training.StopTraining());
-    });
   }
 
   cancelExercise(progress: number) {
-    this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(ex => {
-      this.addDataToDatabase({
-        ...ex,
-        duration: ex.duration * (progress / 100),
-        calories: ex.calories * (progress / 100),
-        date: new Date(),
-        state: 'completed'
+    this.store
+      .select(fromTraining.getActiveTraining)
+      .pipe(take(1))
+      .subscribe((ex) => {
+        if (ex) {
+          this.addDataToDatabase({
+            ...(ex as Exercise),
+            duration: ex.duration * (progress / 100),
+            calories: ex.calories * (progress / 100),
+            date: new Date(),
+            state: 'cancelled', // Update state to 'cancelled' instead of 'completed'
+          });
+        }
+        this.store.dispatch(new Training.StopTraining());
       });
-      this.store.dispatch(new Training.StopTraining());
-    });
   }
 
   fetchCompletedOrCancelledExercises() {
     this.fbSubs.push(
       this.db
         .collection('finishedExercises')
-        .valueChanges()
-        .subscribe((exercises: Exercise[]) => {
-          this.store.dispatch(new Training.SetFinishedTrainings(exercises));
-        })
+        .snapshotChanges()
+        .pipe(
+          map((docArray) => {
+            return docArray.map((doc) => {
+              const exerciseData = doc.payload.doc.data() as Exercise;
+              return {
+                ...exerciseData,
+                id: doc.payload.doc.id,
+              };
+            });
+          })
+        )
+        .subscribe(
+          (exercises: Exercise[]) => {
+            this.store.dispatch(new Training.SetFinishedTrainings(exercises));
+          },
+          (error) => {
+            this.uiService.showSnackbar(
+              'Fetching completed or cancelled exercises failed, please try again later',
+              '',
+              3000
+            );
+          }
+        )
     );
   }
 
   cancelSubscriptions() {
-    this.fbSubs.forEach(sub => sub.unsubscribe());
+    this.fbSubs.forEach((sub) => sub.unsubscribe());
   }
 
   private addDataToDatabase(exercise: Exercise) {

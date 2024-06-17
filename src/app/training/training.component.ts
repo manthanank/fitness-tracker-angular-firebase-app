@@ -11,7 +11,7 @@ import * as fromTraining from './training.reducer';
   styleUrls: ['./training.component.css']
 })
 export class TrainingComponent implements OnInit {
-  ongoingTraining$: Observable<boolean>;
+  ongoingTraining$: Observable<boolean> = new Observable();
 
   constructor(private trainingService: TrainingService, private store: Store<fromTraining.State>) {}
 

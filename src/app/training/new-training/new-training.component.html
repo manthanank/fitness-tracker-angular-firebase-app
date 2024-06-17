@@ -1,21 +1,22 @@
-<section class="new-training" class="new-training flex-container">
-  <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
-    <mat-card class="flex-item">
-      <mat-card-title class="center-align">Time to start a workout!</mat-card-title>
-      <mat-card-content class="center-align">
-        <mat-form-field *ngIf="!(isLoading$ | async) && exercises$ | async">
-          <mat-select placeholder="Choose Exercise" ngModel name="exercise" required>
-            <mat-option *ngFor="let exercise of exercises$ | async" [value]="exercise.id">
-              {{ exercise.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
-      </mat-card-content>
-      <mat-card-actions class="center-align" *ngIf="!(isLoading$ | async)">
-        <button *ngIf="exercises$ | async" type="submit" mat-button [disabled]="f.invalid">Start</button>
-        <button *ngIf="!(exercises$ | async)" type="button" mat-button (click)="fetchExercises()">Fetch Again</button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
+<section class="new-training flex-container">
+    <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
+        <mat-card class="flex-item">
+            <mat-card-title class="center-align">Time to start a workout!</mat-card-title>
+            <mat-card-content class="center-align">
+                <mat-form-field *ngIf="!(isLoading$ | async)">
+                    <mat-select placeholder="Choose Exercise" ngModel name="exercise" required>
+                        <mat-option *ngFor="let exercise of (exercises$ | async)" [value]="exercise.id">
+                            {{ exercise.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+            </mat-card-content>
+            <mat-card-actions class="center-align">
+                <button *ngIf="exercises$ | async" type="submit" mat-button [disabled]="f.invalid">Start</button>
+                <button *ngIf="!(exercises$ | async)" type="button" mat-button (click)="fetchExercises()">Fetch
+                    Again</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
 </section>

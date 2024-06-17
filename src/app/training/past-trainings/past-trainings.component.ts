@@ -1,30 +1,22 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  AfterViewInit
-} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-
 import { Exercise } from '../exercise.model';
 import { TrainingService } from '../training.service';
 import * as fromTraining from '../training.reducer';
-
 @Component({
   selector: 'app-past-trainings',
   templateUrl: './past-trainings.component.html',
-  styleUrls: ['./past-trainings.component.css']
+  styleUrls: ['./past-trainings.component.scss'],
 })
-export class PastTrainingsComponent
-  implements OnInit, AfterViewInit {
+export class PastTrainingsComponent implements OnInit, AfterViewInit {
   displayedColumns = ['date', 'name', 'duration', 'calories', 'state'];
   dataSource = new MatTableDataSource<Exercise>();
 
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort = new MatSort();
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   constructor(
     private trainingService: TrainingService,
@@ -32,11 +24,11 @@ export class PastTrainingsComponent
   ) {}
 
   ngOnInit() {
-    this.store.select(fromTraining.getFinishedExercises).subscribe(
-      (exercises: Exercise[]) => {
+    this.store
+      .select(fromTraining.getFinishedExercises)
+      .subscribe((exercises: Exercise[]) => {
         this.dataSource.data = exercises;
-      }
-    );
+      });
     this.trainingService.fetchCompletedOrCancelledExercises();
   }
 
@@ -45,7 +37,8 @@ export class PastTrainingsComponent
     this.dataSource.paginator = this.paginator;
   }
 
-  doFilter(filterValue: string) {
+  doFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
