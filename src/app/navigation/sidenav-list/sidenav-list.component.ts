@@ -1,12 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MaterialModule } from '../../material.module';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import * as fromRoot from '../../app.reducer';
+import { AsyncPipe, NgIf } from '@angular/common';
 @Component({
   selector: 'app-sidenav-list',
+  standalone: true,
+  imports: [MaterialModule, AsyncPipe, NgIf],
   templateUrl: './sidenav-list.component.html',
-  styleUrls: ['./sidenav-list.component.scss'],
+  styleUrl: './sidenav-list.component.scss',
 })
 export class SidenavListComponent implements OnInit {
   @Output() closeSidenav = new EventEmitter<void>();

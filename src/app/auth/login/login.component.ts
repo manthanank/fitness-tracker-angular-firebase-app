@@ -1,14 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MaterialModule } from '../../material.module';
 import { Observable } from 'rxjs';
-import { UIService } from 'src/app/shared/ui.service';
-import { AuthService } from '../auth.service';
 import { Store } from '@ngrx/store';
+import { AuthService } from '../auth.service';
 import * as fromRoot from '../../app.reducer';
+import { AsyncPipe, NgIf } from '@angular/common';
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, MaterialModule, NgIf, AsyncPipe],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({});
@@ -16,17 +25,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private uiService: UIService,
     private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit() {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
-    // this.loadingSubs = this.uiService.loadingStateChanged.subscribe(
-    //   isLoading => {
-    //     this.isLoading = isLoading;
-    //   }
-    // );
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         validators: [Validators.required, Validators.email],
@@ -41,10 +44,4 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password,
     });
   }
-
-  // ngOnDestroy() {
-  //   if (this.loadingSubs) {
-  //     this.loadingSubs.unsubscribe();
-  //   }
-  // }
 }

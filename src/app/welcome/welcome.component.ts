@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MaterialModule } from '../material.module';
 
 @Component({
   selector: 'app-welcome',
+  standalone: true,
+  imports: [MaterialModule],
   templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss'],
+  styleUrl: './welcome.component.scss',
 })
-export class WelcomeComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class WelcomeComponent {}

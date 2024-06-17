@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { TrainingService } from '../training.service';
 import * as fromTraining from '../training.reducer';
-import { StopTrainingComponent } from './stop-training.component';
+import { MaterialModule } from '../../material.module';
 @Component({
   selector: 'app-current-training',
+  standalone: true,
+  imports: [MaterialModule],
   templateUrl: './current-training.component.html',
-  styleUrls: ['./current-training.component.scss'],
+  styleUrl: './current-training.component.scss',
 })
 export class CurrentTrainingComponent implements OnInit {
+  @ViewChild('dialogContent') templateRef!: TemplateRef<any>;
   progress = 0;
   timer: any = 0;
+  passedData = { progress: 0 }; // Initialize passedData
 
   constructor(
     private dialog: MatDialog,
@@ -44,7 +48,7 @@ export class CurrentTrainingComponent implements OnInit {
 
   onStop() {
     clearInterval(this.timer);
-    const dialogRef = this.dialog.open(StopTrainingComponent, {
+    const dialogRef = this.dialog.open(this.templateRef, {
       data: {
         progress: this.progress,
       },

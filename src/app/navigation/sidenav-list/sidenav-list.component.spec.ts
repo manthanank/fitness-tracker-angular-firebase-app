@@ -6,10 +6,12 @@ describe('SidenavListComponent', () => {
   let component: SidenavListComponent;
   let fixture: ComponentFixture<SidenavListComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [SidenavListComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [SidenavListComponent]
+    })
+    .compileComponents();
+
     fixture = TestBed.createComponent(SidenavListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -6,10 +6,14 @@ import { Store } from '@ngrx/store';
 import { Exercise } from '../exercise.model';
 import { TrainingService } from '../training.service';
 import * as fromTraining from '../training.reducer';
+import { MaterialModule } from '../../material.module';
+import { DatePipe, DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-past-trainings',
+  standalone: true,
+  imports: [MaterialModule, DatePipe, DecimalPipe],
   templateUrl: './past-trainings.component.html',
-  styleUrls: ['./past-trainings.component.scss'],
+  styleUrl: './past-trainings.component.scss',
 })
 export class PastTrainingsComponent implements OnInit, AfterViewInit {
   displayedColumns = ['date', 'name', 'duration', 'calories', 'state'];

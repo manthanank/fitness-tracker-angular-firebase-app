@@ -1,14 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { UIService } from 'src/app/shared/ui.service';
-import { AuthService } from '../auth.service';
-import { Store } from '@ngrx/store';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../../material.module';
 import * as fromRoot from '../../app.reducer';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { UIService } from '../../shared/ui.service';
+import { AuthService } from '../auth.service';
+import { AsyncPipe, NgIf } from '@angular/common';
+// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 @Component({
   selector: 'app-signup',
+  standalone: true,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    NgIf,
+    AsyncPipe,
+    // AngularFireAuthModule,
+  ],
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  styleUrl: './signup.component.scss',
 })
 export class SignupComponent implements OnInit {
   maxDate = new Date();
