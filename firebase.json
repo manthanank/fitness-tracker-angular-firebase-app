@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/fitness-tracker-angular-firebase-app",
+    "public": "dist/fitness-tracker-angular-firebase-app/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -9,7 +9,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/dist/fitness-tracker-angular-firebase-app/browser/index.html"
+        "destination": "/index.html"
       }
     ]
   }
