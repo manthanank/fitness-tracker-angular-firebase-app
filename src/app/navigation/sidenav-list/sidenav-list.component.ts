@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import * as fromRoot from '../../app.reducer';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-sidenav-list',
   standalone: true,
-  imports: [MaterialModule, AsyncPipe, NgIf],
+  imports: [MaterialModule, AsyncPipe, NgIf, RouterLink],
   templateUrl: './sidenav-list.component.html',
   styleUrl: './sidenav-list.component.scss',
 })
