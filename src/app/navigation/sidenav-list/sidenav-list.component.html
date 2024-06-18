@@ -17,7 +17,7 @@
             <span>Training</span>
         </div>
     </a>
-    <a mat-list-item (click)="onLogout()" (click)="onClose()" *ngIf="isAuth$ | async">
+    <a mat-list-item (click)="onLogout()" *ngIf="isAuth$ | async">
         <div class="flex">
             <mat-icon>exit_to_app</mat-icon>
             <span>Logout</span>
