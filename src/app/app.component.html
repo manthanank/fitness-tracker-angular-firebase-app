@@ -1,8 +1,8 @@
-<mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation">
+<mat-sidenav-container class="h-full">
+  <mat-sidenav #sidenav role="navigation" class="h-full w-64">
     <app-sidenav-list (closeSidenav)="sidenav.close()"></app-sidenav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="h-full">
     <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
     <main>
       <router-outlet></router-outlet>

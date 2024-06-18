@@ -1,25 +1,23 @@
-<mat-toolbar>
-    <div class="menu-button">
+<mat-toolbar class="bg-blue-600 flex justify-between items-center p-4">
+    <div class="flex items-center">
         <button mat-icon-button (click)="onToggleSidenav()">
-            <mat-icon>menu</mat-icon>
+            <mat-icon class="text-white">menu</mat-icon>
         </button>
+        <a routerLink="/" class="text-white text-lg ml-4">Fitness Tracker</a>
     </div>
-    <div class="title">
-        <a routerLink="/">NG Fitness</a>
-    </div>
-    <div class="navigation">
-        <ul class="navigation-items">
+    <div>
+        <ul class="flex space-x-4">
             <li *ngIf="!(isAuth$ | async)">
-                <a routerLink="/signup">Signup</a>
+                <a routerLink="/signup" class="text-white hover:text-gray-300">Signup</a>
             </li>
             <li *ngIf="!(isAuth$ | async)">
-                <a routerLink="/login">Login</a>
+                <a routerLink="/login" class="text-white hover:text-gray-300">Login</a>
             </li>
             <li *ngIf="isAuth$ | async">
-                <a routerLink="/training">Training</a>
+                <a routerLink="/training" class="text-white hover:text-gray-300">Training</a>
             </li>
             <li *ngIf="isAuth$ | async">
-                <a style="cursor: pointer" (click)="onLogout()">Logout</a>
+                <a class="text-white hover:text-gray-300 cursor-pointer" (click)="onLogout()">Logout</a>
             </li>
         </ul>
     </div>

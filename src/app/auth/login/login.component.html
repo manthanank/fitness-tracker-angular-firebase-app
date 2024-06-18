@@ -1,17 +1,17 @@
-<section>
-    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
+<section class="flex justify-center items-center mt-5">
+    <form class="login-form flex flex-col items-center justify-center gap-2 p-5 border rounded-md" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="w-72">
             <input type="email" matInput placeholder="Your email" formControlName="email">
             <mat-hint>Please enter a valid email.</mat-hint>
             <mat-error>Invalid or missing email.</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="w-72">
             <input type="password" matInput placeholder="Your password" formControlName="password">
             <mat-hint>Please enter your password.</mat-hint>
             <mat-error>Missing password.</mat-error>
         </mat-form-field>
         <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary"
-            [disabled]="loginForm.invalid">Submit</button>
+            [disabled]="loginForm.invalid" class="mt-2">Submit</button>
         <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
     </form>
 </section>

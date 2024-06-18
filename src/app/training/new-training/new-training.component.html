@@ -1,21 +1,26 @@
-<section class="new-training flex-container">
-    <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
-        <mat-card class="flex-item">
-            <mat-card-title class="center-align">Time to start a workout!</mat-card-title>
-            <mat-card-content class="center-align">
-                <mat-form-field *ngIf="!(isLoading$ | async)">
-                    <mat-select placeholder="Choose Exercise" ngModel name="exercise" required>
+<section class="p-8">
+    <form (ngSubmit)="onStartTraining(f)" #f="ngForm" class="flex justify-center">
+        <mat-card class="w-full max-w-lg p-8">
+            <mat-card-title class="text-lg font-semibold text-center">Time to start a workout!</mat-card-title>
+            <mat-card-content>
+                <mat-form-field *ngIf="!(isLoading$ | async)" class="w-full">
+                    <mat-select placeholder="Choose Exercise" ngModel name="exercise" required class="w-full">
                         <mat-option *ngFor="let exercise of (exercises$ | async)" [value]="exercise.id">
                             {{ exercise.name }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+                <mat-spinner *ngIf="isLoading$ | async" class="block mx-auto"></mat-spinner>
             </mat-card-content>
-            <mat-card-actions class="center-align">
-                <button *ngIf="exercises$ | async" type="submit" mat-button [disabled]="f.invalid">Start</button>
-                <button *ngIf="!(exercises$ | async)" type="button" mat-button (click)="fetchExercises()">Fetch
-                    Again</button>
+            <mat-card-actions class="flex justify-center">
+                <button *ngIf="exercises$ | async" type="submit" mat-raised-button [disabled]="f.invalid"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Start
+                </button>
+                <button *ngIf="!(exercises$ | async)" type="button" mat-raised-button (click)="fetchExercises()"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Fetch Again
+                </button>
             </mat-card-actions>
         </mat-card>
     </form>
