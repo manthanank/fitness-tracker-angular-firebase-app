@@ -9,7 +9,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/dist/fitness-tracker-angular-firebase-app/index.html"
+        "destination": "/dist/fitness-tracker-angular-firebase-app/browser/index.html"
       }
     ]
   }
